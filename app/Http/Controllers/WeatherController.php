@@ -37,6 +37,14 @@ class WeatherController extends Controller
         return view('weather', compact('weatherData', 'forecastData', 'city'));
     }
 
+    public function show(\Illuminate\Http\Request $request)
+{
+    $city = $request->input('city', 'Lagos'); // works for both GET ?city=… and POST
+    // ... fetch/return weather ...
+    return response()->json(['city' => $city, 'ok' => true]);
+}
+
+
     // ✅ Add this missing function
     public function forecast()
     {
