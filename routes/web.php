@@ -1,35 +1,19 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
-use Illuminate\Support\Facades\Route;
 
+// Weather pages
 Route::get('/', [WeatherController::class, 'index']);
-Route::post('/weather', [WeatherController::class, 'getWeather']);
+Route::match(['get','post'], '/weather', [WeatherController::class, 'getWeather'])->name('weather');
+Route::get('/forecast', [WeatherController::class, 'forecast']);
 
-
-
-Route::get('/', [WeatherController::class, 'index']);
-Route::post('/weather', [WeatherController::class, 'getWeather']);
-Route::get('/forecast', [WeatherController::class, 'forecast']);  
+// Other pages
 Route::get('/about', [PageController::class, 'about']);
 Route::get('/settings', [PageController::class, 'settings']);
-Route::match(['get','post'], '/weather', [WeatherController::class, 'show']);
 
-
-
-Route::get('/', [WeatherController::class, 'index']);
-Route::post('/weather', [WeatherController::class, 'getWeather']);
-
-
-
-
-
-
-
+// Contact
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'sendInquiry']);
-
-
-
